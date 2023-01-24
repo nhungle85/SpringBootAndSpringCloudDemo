@@ -19,3 +19,14 @@ http://localhost:8888/currency-exchange/default
 port: 8000 (spring-cloud-config), 8001 (default)
 
 API: http://localhost:8000/currency-exchange/{from}/to/{to}
+API: http://localhost:8000/currency-exchange/findAll
+API: http://localhost:8000/currency-exchange/create
+API: http://localhost:8000/currency-exchange/update
+API: http://localhost:8000/currency-exchange/delete/{id}
+
+#4. Currency conversion service
+port: 8100
+
+#5. Eureka naming service
+localhost:8761
+
