@@ -1,5 +1,5 @@
 # SpringBootAndSpringCloudDemo
-Spring Boot, Spring Cloud (config, eureka, openfeign, loadbalance (through eureka and feign)), Docker, Kubernetes and REST API (REST Web Services)
+Spring Boot, Spring Cloud (config, eureka, openfeign, loadbalance (through eureka and feign), api gateway), Docker, Kubernetes and REST API (REST Web Services)
 
 # Projects:
 #1. Limits Service
@@ -30,4 +30,7 @@ http://localhost:8100/currency-conversion/exchange-by-feign/{from}/to/{to}/{amou
 
 #5. Eureka naming service
 localhost:8761
+
+#6. Api Gateway
+localhost:8765
 
