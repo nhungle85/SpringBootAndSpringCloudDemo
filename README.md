@@ -1,5 +1,5 @@
 # SpringBootAndSpringCloudDemo
-Spring Boot, Spring Cloud (config, eureka, openfeign), Docker, Kubernetes and REST API (REST Web Services)
+Spring Boot, Spring Cloud (config, eureka, openfeign, loadbalance (through eureka and feign)), Docker, Kubernetes and REST API (REST Web Services)
 
 # Projects:
 #1. Limits Service
