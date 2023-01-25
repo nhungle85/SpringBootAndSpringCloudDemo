@@ -1,5 +1,5 @@
 # SpringBootAndSpringCloudDemo
-Spring Boot, Spring Cloud, Docker, Kubernetes and REST API (REST Web Services)
+Spring Boot, Spring Cloud (config, eureka, openfeign), Docker, Kubernetes and REST API (REST Web Services)
 
 # Projects:
 #1. Limits Service
@@ -26,6 +26,7 @@ API: http://localhost:8000/currency-exchange/delete/{id}
 
 #4. Currency conversion service
 port: 8100
+http://localhost:8100/currency-conversion/exchange-by-feign/{from}/to/{to}/{amount}
 
 #5. Eureka naming service
 localhost:8761
