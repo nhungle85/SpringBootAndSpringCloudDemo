@@ -33,4 +33,6 @@ localhost:8761
 
 #6. Api Gateway
 localhost:8765
+http://localhost:8765/currency-service/currency-exchange/{from}/to/{to}
+http://localhost:8765/currency-conversion/currency-conversion/exchange-by-feign/{from}/to/{to}/{amount}
 
