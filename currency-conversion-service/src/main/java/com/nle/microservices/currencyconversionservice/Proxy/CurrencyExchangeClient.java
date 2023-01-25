@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 //@FeignClient(name = "currency-service", url="localhost:8000") if not register to naming service
-@FeignClient(name = "currency-service")
+@FeignClient(name = "currency-exchange")
 public interface CurrencyExchangeClient {
 
     @GetMapping("/currency-exchange/{from}/to/{to}")
