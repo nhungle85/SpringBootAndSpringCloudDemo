@@ -36,3 +36,8 @@ localhost:8765
 http://localhost:8765/currency-service/currency-exchange/{from}/to/{to}
 http://localhost:8765/currency-conversion/currency-conversion/exchange-by-feign/{from}/to/{to}/{amount}
 
+#Add custom rout: http://localhost:8765/exchange-by-new/exchange-by-feign/{from}/to/{to}/{amount}
+http://localhost:8765/currency-exchange/{from}/to/{to}
+http://localhost:8765/currency-conversion/exchange-by-feign/{from}/to/{to}/{amount}
+
+
