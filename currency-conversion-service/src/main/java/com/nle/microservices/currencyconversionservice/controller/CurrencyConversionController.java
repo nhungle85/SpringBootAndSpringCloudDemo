@@ -25,10 +25,11 @@ public class CurrencyConversionController {
     }
 
     @GetMapping("/exchange-by-feign/{from}/to/{to}/{amount}")
-    public BigDecimal exchangeUsingFeignClient(@PathVariable String from, @PathVariable String to, @PathVariable BigDecimal amount) {
+    public CurrencyExchangeResponse exchangeUsingFeignClient(@PathVariable String from, @PathVariable String to, @PathVariable BigDecimal amount) {
         CurrencyExchangeResponse response = currencyExchangeClient.convert(from, to);
+        response.setTotalAmount(amount.multiply(response.getConversionMultiple()));
 
-        return amount.multiply(response.getConversionMultiple());
+        return response;
     }
 
     @GetMapping("/exchange/{from}/to/{to}/{amount}")

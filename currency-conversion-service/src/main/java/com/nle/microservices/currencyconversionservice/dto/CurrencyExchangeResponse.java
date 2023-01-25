@@ -17,4 +17,5 @@ public class CurrencyExchangeResponse {
     private BigDecimal conversionMultiple;
     //read the env from the instance that the request is redirect to
     private String environment;
+    private BigDecimal totalAmount;
 }

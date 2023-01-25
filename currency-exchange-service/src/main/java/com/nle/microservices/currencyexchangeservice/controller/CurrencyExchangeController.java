@@ -26,7 +26,9 @@ public class CurrencyExchangeController {
 
     @GetMapping("/{from}/to/{to}")
     public CurrencyExchangeResponse convert(@PathVariable String from, @PathVariable String to) {
-        return service.findByFromAndTo(from, to);
+        CurrencyExchangeResponse response = service.findByFromAndTo(from, to);
+        response.setEnvironment(environment.getProperty("server.port"));
+        return response;
     }
 
     @PostMapping("/create")
