@@ -2,6 +2,7 @@ package com.nle.microservices.currencyconversionservice.controller;
 
 import com.nle.microservices.currencyconversionservice.Proxy.CurrencyExchangeClient;
 import com.nle.microservices.currencyconversionservice.dto.CurrencyExchangeResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,17 +16,20 @@ import java.util.HashMap;
 
 @RestController
 @RequestMapping("/currency-conversion")
+@Slf4j
 public class CurrencyConversionController {
     @Autowired
     private CurrencyExchangeClient currencyExchangeClient;
 
     @GetMapping("/sayHi")
     public String sayHi() {
+        log.info("sayHi");
         return "Hi";
     }
 
     @GetMapping("/exchange-by-feign/{from}/to/{to}/{amount}")
     public CurrencyExchangeResponse exchangeUsingFeignClient(@PathVariable String from, @PathVariable String to, @PathVariable BigDecimal amount) {
+        log.info("exchangeUsingFeignClient");
         CurrencyExchangeResponse response = currencyExchangeClient.convert(from, to);
         response.setTotalAmount(amount.multiply(response.getConversionMultiple()));
 
