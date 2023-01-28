@@ -1,6 +1,14 @@
-version: '3.7'
+version: '3.9'
 
 services:
+  naming-server:
+    image: misssg85/naming-server:0.0.1-SNAPSHOT
+    mem_limit: 700m
+    ports:
+      - "8761:8761"
+    networks:
+      - currency-network
+
   currency-exchange:
     image: misssg85/currency-exchange:0.0.1-SNAPSHOT
     mem_limit: 700m
@@ -8,5 +16,79 @@ services:
       - "8000:8000"
     networks:
       - currency-network
+    depends_on:
+      - naming-server
+      - rabbitmq
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+      SPRING.RABBITMQ.HOST: rabbitmq
+      SPRING.RABBITMQ.PORT: 15672
+      SPRING.RABBITMQ.USERNAME: guest
+      SPRING.RABBITMQ.PASSWORD: guest
+      SPRING.ZIPKIN.SENDER.TYPE: rabbit
+
+  currency-conversion:
+    image: misssg85/currency-conversion:0.0.1-SNAPSHOT
+    mem_limit: 700m
+    ports:
+      - "8100:8100"
+    networks:
+      - currency-network
+    depends_on:
+      - naming-server
+      - rabbitmq
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+      SPRING.RABBITMQ.HOST: rabbitmq
+      SPRING.RABBITMQ.PORT: 15672
+      SPRING.RABBITMQ.USERNAME: guest
+      SPRING.RABBITMQ.PASSWORD: guest
+      SPRING.ZIPKIN.SENDER.TYPE: rabbit
+
+  api-gateway:
+    image: misssg85/api-gateway:0.0.1-SNAPSHOT
+    mem_limit: 700m
+    ports:
+      - "8765:8765"
+    networks:
+      - currency-network
+    depends_on:
+      - naming-server
+      - rabbitmq
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+      SPRING.RABBITMQ.HOST: rabbitmq
+      SPRING.RABBITMQ.PORT: 15672
+      SPRING.RABBITMQ.USERNAME: guest
+      SPRING.RABBITMQ.PASSWORD: guest
+      SPRING.ZIPKIN.SENDER.TYPE: rabbit
+
+  zipkin-server:
+    image: openzipkin/zipkin
+    mem_limit: 300m
+    ports:
+      - "9411:9411"
+    networks:
+      - currency-network
+    depends_on:
+      - rabbitmq
+    environment:
+      SPRING.RABBITMQ.HOST: rabbitmq
+      SPRING.RABBITMQ.PORT: 15672
+      SPRING.RABBITMQ.USERNAME: guest
+      SPRING.RABBITMQ.PASSWORD: guest
+
+  rabbitmq:
+    image: rabbitmq:management
+    mem_limit: 200m
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - currency-network
+
 networks:
   currency-network:
