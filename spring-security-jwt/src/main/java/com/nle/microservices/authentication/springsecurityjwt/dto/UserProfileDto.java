@@ -15,7 +15,6 @@ public class UserProfileDto {
     private String userName;
     private String firstName;
     private String lastName;
-    private String login;
     private String token;
 
     public static UserProfileDto fromEntity(UserProfile entity) {
